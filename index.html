@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+
+    <title>QuestionDungeon</title>
+    <style>
+      maze {
+        border: 1px solid #000000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid overflow-hidden">
+      <div class="row gy-2">
+        <div class="col-12">
+          <br />
+          <h1>Question Dungeon</h1>
+          <hr />
+        </div>
+        <br />
+        <div class="col-3">
+            
+        </div>
+        <div class="col-6">
+            <div class="alert alert-warning" role="alert" id="divInicio">
+            </div>
+
+            <div class="alert alert-success" role="alert" id="divTermino">
+            </div>
+          <div class="p-12 border bg-light height: 550px; width: 550px;">
+            <canvas
+              id="Maze"
+              class="maze position-absolute top-50 start-50 translate-middle"
+              style="background-color: peru"
+              width="650"
+              height="650"
+            >
+            </canvas>
+          </div>
+        </div>
+        <div class="col-3"></div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+      integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"
+      integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      var array = [1, 2, 3, 4];
+      var seccion = 0;
+      var inicioX = 0;
+      var inicioY = 0;
+
+      function inicio() {
+        const rndSeccion = Math.floor(Math.random() * 4) + 1;
+        const index = array.indexOf(rndSeccion);
+        array.splice(index, 1);
+        seccion = rndSeccion;
+        switch (rndSeccion) {
+          case 1:
+          document.getElementById("divInicio").innerHTML = "Seccion inicio: A";
+            console.log("Seccion inicio: A");
+            inicioX = 75;
+            inicioY = 75;
+            break;
+          case 2:
+          document.getElementById("divInicio").innerHTML = "Seccion inicio: B";
+            console.log("Seccion inicio: B");
+            inicioX = 575;
+            inicioY = 75;
+            break;
+          case 3:
+          document.getElementById("divInicio").innerHTML = "Seccion inicio: C";
+            console.log("Seccion inicio: C");
+            inicioX = 75;
+            inicioY = 575;
+            break;
+          default:
+          document.getElementById("divInicio").innerHTML = "Seccion inicio: D";
+            console.log("Seccion inicio: D");
+            inicioX = 575;
+            inicioY = 575;
+        }
+      }
+
+      function drawLava() {
+        var ctx = document.getElementById("Maze").getContext("2d");
+        var img = new Image();
+        img.onload = function () {
+          for (var i = 0; i < 13; i++) {
+            ctx.drawImage(img, i * 50, 0);
+            ctx.drawImage(img, i * 50, 600);
+            ctx.drawImage(img, 0, i * 50);
+            ctx.drawImage(img, 600, i * 50);
+          }
+        };
+        img.src = "lava.jpg";
+      }
+
+      function drawStone(stLado, stX, stY) {
+        var ctx = document.getElementById("Maze").getContext("2d");
+        var img = new Image();
+        if (stLado) {
+          img.onload = function () {
+            ctx.drawImage(img, stX - 50, stY);
+            ctx.drawImage(img, stX + 50, stY);
+          };
+        } else {
+          img.onload = function () {
+            ctx.drawImage(img, stX, stY - 50);
+            ctx.drawImage(img, stX, stY + 50);
+          };
+        }
+        img.src = "stone.jpg";
+      }
+
+      function drawGrass() {
+        var rndSeccion = Math.floor(Math.random() * 3) + 1;
+        var lado = Math.random() >= 0.5;
+
+        var posXsalida = 0;
+        var posYsalida = 0;
+        let salidaSeccion = array[rndSeccion - 1];
+        const index = array.indexOf(rndSeccion - 1);
+        array.splice(index, 1);
+        switch (salidaSeccion) {
+          case 1:
+            console.log("Seccion salida: A");
+            document.getElementById("divTermino").innerHTML = "Seccion salida: A";
+            if (lado) {
+              posXsalida = 50 * (Math.floor(Math.random() * (5 - 2 + 1)) + 2);
+              posYsalida = 0;
+            } else {
+              posXsalida = 0;
+              posYsalida = 50 * (Math.floor(Math.random() * (5 - 2 + 1)) + 2);
+            }
+
+            break;
+          case 2:
+            console.log("Seccion salida: B");
+            document.getElementById("divTermino").innerHTML = "Seccion salida: B";
+            if (lado) {
+              posXsalida = 50 * (Math.floor(Math.random() * (11 - 7 + 1)) + 7);
+              posYsalida = 0;
+            } else {
+              posXsalida = 600;
+              posYsalida = 50 * (Math.floor(Math.random() * (5 - 2 + 1)) + 2);
+            }
+            break;
+          case 3:
+            console.log("Seccion salida: C");
+            document.getElementById("divTermino").innerHTML = "Seccion salida: C";
+            if (lado) {
+              posXsalida = 50 * (Math.floor(Math.random() * (5 - 2 + 1)) + 2);
+              posYsalida = 600;
+            } else {
+              posXsalida = 0;
+              posYsalida = 50 * (Math.floor(Math.random() * (11 - 7 + 1)) + 7);
+            }
+            break;
+          default:
+            console.log("Seccion salida: D");
+            document.getElementById("divTermino").innerHTML = "Seccion salida: D";
+            if (lado) {
+              posXsalida = 50 * (Math.floor(Math.random() * (11 - 7 + 1)) + 7);
+              posYsalida = 600;
+            } else {
+              posXsalida = 600;
+              posYsalida = 50 * (Math.floor(Math.random() * (11 - 7 + 1)) + 7);
+            }
+        }
+        var ctx = document.getElementById("Maze").getContext("2d");
+        var img = new Image();
+        img.onload = function () {
+          ctx.drawImage(img, posXsalida, posYsalida);
+        };
+        img.src = "grass.jpg";
+
+        drawStone(lado, posXsalida, posYsalida);
+      }
+
+      var c = document.getElementById("Maze");
+      var ctx = c.getContext("2d");
+      ctx.beginPath();
+
+      inicio();
+      drawLava();
+      drawGrass();
+
+      for (var i = 0; i < 5; i++) {
+        for (var j = 0; j < 5; j++) {
+          let x = i * 50;
+          let y = j * 50;
+          var rectangle = new Path2D();
+          rectangle.rect(50 + x, 50 + y, 50, 50);
+          ctx.stroke(rectangle);
+
+          rectangle.rect(350 + x, 50 + y, 50, 50);
+          ctx.stroke(rectangle);
+
+          rectangle.rect(50 + x, 350 + y, 50, 50);
+          ctx.stroke(rectangle);
+
+          rectangle.rect(350 + x, 350 + y, 50, 50);
+          ctx.stroke(rectangle);
+        }
+      }
+
+      ctx.fillStyle = "#FF0000";
+      ctx.fillRect(inicioX - 25, inicioY - 25, 50, 50);
+      ctx.arc(inicioX, inicioY, 10, 0, 2 * Math.PI);
+      ctx.stroke();
+    </script>
+  </body>
+</html>
