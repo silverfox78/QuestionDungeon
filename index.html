@@ -27,15 +27,11 @@
           <hr />
         </div>
         <br />
-        <div class="col-3">
-            
-        </div>
+        <div class="col-3"></div>
         <div class="col-6">
-            <div class="alert alert-warning" role="alert" id="divInicio">
-            </div>
+          <div class="alert alert-warning" role="alert" id="divInicio"></div>
 
-            <div class="alert alert-success" role="alert" id="divTermino">
-            </div>
+          <div class="alert alert-success" role="alert" id="divTermino"></div>
           <div class="p-12 border bg-light height: 550px; width: 550px;">
             <canvas
               id="Maze"
@@ -80,25 +76,29 @@
         seccion = rndSeccion;
         switch (rndSeccion) {
           case 1:
-          document.getElementById("divInicio").innerHTML = "Seccion inicio: A";
+            document.getElementById("divInicio").innerHTML =
+              "Seccion inicio: A";
             console.log("Seccion inicio: A");
             inicioX = 75;
             inicioY = 75;
             break;
           case 2:
-          document.getElementById("divInicio").innerHTML = "Seccion inicio: B";
+            document.getElementById("divInicio").innerHTML =
+              "Seccion inicio: B";
             console.log("Seccion inicio: B");
             inicioX = 575;
             inicioY = 75;
             break;
           case 3:
-          document.getElementById("divInicio").innerHTML = "Seccion inicio: C";
+            document.getElementById("divInicio").innerHTML =
+              "Seccion inicio: C";
             console.log("Seccion inicio: C");
             inicioX = 75;
             inicioY = 575;
             break;
           default:
-          document.getElementById("divInicio").innerHTML = "Seccion inicio: D";
+            document.getElementById("divInicio").innerHTML =
+              "Seccion inicio: D";
             console.log("Seccion inicio: D");
             inicioX = 575;
             inicioY = 575;
@@ -148,7 +148,8 @@
         switch (salidaSeccion) {
           case 1:
             console.log("Seccion salida: A");
-            document.getElementById("divTermino").innerHTML = "Seccion salida: A";
+            document.getElementById("divTermino").innerHTML =
+              "Seccion salida: A";
             if (lado) {
               posXsalida = 50 * (Math.floor(Math.random() * (5 - 2 + 1)) + 2);
               posYsalida = 0;
@@ -160,7 +161,8 @@
             break;
           case 2:
             console.log("Seccion salida: B");
-            document.getElementById("divTermino").innerHTML = "Seccion salida: B";
+            document.getElementById("divTermino").innerHTML =
+              "Seccion salida: B";
             if (lado) {
               posXsalida = 50 * (Math.floor(Math.random() * (11 - 7 + 1)) + 7);
               posYsalida = 0;
@@ -171,7 +173,8 @@
             break;
           case 3:
             console.log("Seccion salida: C");
-            document.getElementById("divTermino").innerHTML = "Seccion salida: C";
+            document.getElementById("divTermino").innerHTML =
+              "Seccion salida: C";
             if (lado) {
               posXsalida = 50 * (Math.floor(Math.random() * (5 - 2 + 1)) + 2);
               posYsalida = 600;
@@ -182,7 +185,8 @@
             break;
           default:
             console.log("Seccion salida: D");
-            document.getElementById("divTermino").innerHTML = "Seccion salida: D";
+            document.getElementById("divTermino").innerHTML =
+              "Seccion salida: D";
             if (lado) {
               posXsalida = 50 * (Math.floor(Math.random() * (11 - 7 + 1)) + 7);
               posYsalida = 600;
@@ -199,6 +203,155 @@
         img.src = "grass.jpg";
 
         drawStone(lado, posXsalida, posYsalida);
+      }
+
+      function opcionesRuta(puntoX, puntoY) {
+        let opciones = ["arriba", "abajo", "derecha", "izquierda"];
+        let index = 0;
+
+        if (puntoX == 1) {
+          index = opciones.indexOf("izquierda");
+          opciones.splice(index, 1);
+        }
+
+        if (puntoX == 5) {
+          index = opciones.indexOf("derecha");
+          opciones.splice(index, 1);
+        }
+
+        if (puntoY == 1) {
+          index = opciones.indexOf("arriba");
+          opciones.splice(index, 1);
+        }
+
+        if (puntoY == 5) {
+          index = opciones.indexOf("abajo");
+          opciones.splice(index, 1);
+        }
+
+        return opciones;
+      }
+
+      function proseguirRuta(origenX, origenY, finX, finY) {
+          let salir = origenX == finX && origenY == finY;
+          return !salir;
+      }
+
+      function generaRuta(origenX, origenY, finX, finY) {
+        let sendero = new Array();
+
+        let actualX = origenX;
+        let actualY = origenY;
+        let paso = 0;
+        let proceso = 0;
+        let sinsalida = 0;
+        sendero.push({ X: actualX, Y: actualY });
+
+        let termino = proseguirRuta(origenX, origenY, finX, finY);
+
+        while (termino) {
+          paso++;
+          proceso++;
+
+          let seguir = true;
+          while (seguir) {
+            let tmpactualX = actualX;
+            let tmpactualY = actualY;
+            let opciones = opcionesRuta(actualX, actualY);
+            var rndCamino = Math.floor(Math.random() * opciones.length);
+            let camino = opciones[rndCamino];
+
+            switch (camino) {
+              case "arriba":
+                tmpactualY -= 1;
+                break;
+              case "abajo":
+                tmpactualY += 1;
+                break;
+              case "derecha":
+                tmpactualX += 1;
+                break;
+              default:
+                tmpactualX -= 1;
+                break;
+            }
+
+            seguir = false;
+            sendero.forEach((item) => {
+              if (item.X == tmpactualX && item.Y == tmpactualY) {
+                seguir = true;
+                sinsalida++;
+              }
+            });
+
+            if (sinsalida > 6) {
+              console.error("EXPLOTO - REINTENTAR....");
+              sendero = new Array();
+              actualX = origenX;
+              actualY = origenY;
+              tmpactualX = actualX;
+              tmpactualY = actualY;
+              paso = 0;
+              proceso = 0;
+              sinsalida = 0;
+              sendero.push({ X: actualX, Y: actualY });
+              seguir = true;
+            }
+
+            if (!seguir) {
+              actualX = tmpactualX;
+              actualY = tmpactualY;
+              sinsalida = 0;
+            }
+
+            if (proceso > 100) {
+              console.error("EXPLOTO....");
+              break;
+            }
+          }
+
+          sendero.push({ X: actualX, Y: actualY });
+          termino = proseguirRuta(actualX, actualY, finX, finY);
+        }
+
+        return sendero;
+      }
+
+      function pintaRuta(seccion, sendero) {
+        let inicioX = 0;
+        let inicioY = 0;
+
+        switch (seccion) {
+          case 1:
+            inicioX = 0;
+            inicioY = 50;
+            break;
+
+          case 2:
+            inicioX = 300;
+            inicioY = 50;
+            break;
+
+          case 3:
+            inicioX = 0;
+            inicioY = 350;
+            break;
+
+          default:
+            inicioX = 300;
+            inicioY = 350;
+            break;
+        }
+        ctx.font = "25px Arial";
+        ctx.fillStyle = "#0000FF";
+
+        let contador = 0;
+        sendero.forEach((item) => {
+          contador++;
+          let posX = inicioX + item.X * 50;
+          let posY = inicioY + item.Y * 50;
+          ctx.strokeText(contador, posX, posY);
+        });
       }
 
       var c = document.getElementById("Maze");
@@ -232,6 +385,11 @@
       ctx.fillRect(inicioX - 25, inicioY - 25, 50, 50);
       ctx.arc(inicioX, inicioY, 10, 0, 2 * Math.PI);
       ctx.stroke();
+
+      pintaRuta(1, generaRuta(1, 1, 5, 5));
+      pintaRuta(2, generaRuta(1, 1, 5, 5));
+      pintaRuta(3, generaRuta(1, 1, 5, 5));
+      pintaRuta(4, generaRuta(1, 1, 5, 5));
     </script>
   </body>
 </html>
