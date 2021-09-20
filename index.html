@@ -69,6 +69,11 @@
       var inicioX = 0;
       var inicioY = 0;
 
+      var seccionSalida = 0;
+      var ladoSalida = '';
+      var terminoX = 0;
+      var terminoY = 0;
+
       function inicio() {
         const rndSeccion = Math.floor(Math.random() * 4) + 1;
         const index = array.indexOf(rndSeccion);
@@ -145,17 +150,28 @@
         let salidaSeccion = array[rndSeccion - 1];
         const index = array.indexOf(rndSeccion - 1);
         array.splice(index, 1);
+        seccionSalida = salidaSeccion;
         switch (salidaSeccion) {
           case 1:
             console.log("Seccion salida: A");
             document.getElementById("divTermino").innerHTML =
               "Seccion salida: A";
             if (lado) {
-              posXsalida = 50 * (Math.floor(Math.random() * (5 - 2 + 1)) + 2);
-              posYsalida = 0;
+                ladoSalida = 'arriba';
+                terminoX = (Math.floor(Math.random() * 5) + 1);
+                terminoY = 0;
+                posXsalida = 50 * terminoX;
+                posYsalida = terminoY;
+              //posXsalida = 50 * (Math.floor(Math.random() * (5 - 2 + 1)) + 2);
+              //posYsalida = 0;
             } else {
-              posXsalida = 0;
-              posYsalida = 50 * (Math.floor(Math.random() * (5 - 2 + 1)) + 2);
+                ladoSalida = 'izquierda';
+                terminoX = 0;
+                terminoY = (Math.floor(Math.random() * 5) + 1);
+                posXsalida = terminoX;
+                posYsalida = 50 * terminoY;
+              //posXsalida = 0;
+              //posYsalida = 50 * (Math.floor(Math.random() * (5 - 2 + 1)) + 2);
             }
 
             break;
@@ -164,11 +180,21 @@
             document.getElementById("divTermino").innerHTML =
               "Seccion salida: B";
             if (lado) {
-              posXsalida = 50 * (Math.floor(Math.random() * (11 - 7 + 1)) + 7);
-              posYsalida = 0;
+                ladoSalida = 'arriba';
+                terminoX = (Math.floor(Math.random() * 5) + 1);
+                terminoY = 0;
+                posXsalida = 50 * (6 + terminoX);
+                posYsalida = terminoY;
+              //posXsalida = 50 * (Math.floor(Math.random() * (11 - 7 + 1)) + 7);
+              //posYsalida = 0;
             } else {
-              posXsalida = 600;
-              posYsalida = 50 * (Math.floor(Math.random() * (5 - 2 + 1)) + 2);
+                ladoSalida = 'derecha';
+                terminoX = 0;
+                terminoY = (Math.floor(Math.random() * 5) + 1);
+                posXsalida = 600;
+                posYsalida = 50 * terminoY;
+              //posXsalida = 600;
+              //posYsalida = 50 * (Math.floor(Math.random() * (5 - 2 + 1)) + 2);
             }
             break;
           case 3:
@@ -176,11 +202,21 @@
             document.getElementById("divTermino").innerHTML =
               "Seccion salida: C";
             if (lado) {
-              posXsalida = 50 * (Math.floor(Math.random() * (5 - 2 + 1)) + 2);
-              posYsalida = 600;
+                ladoSalida = 'abajo';
+                terminoX = (Math.floor(Math.random() * 5) + 1);
+                terminoY = 0;
+                posXsalida = 50 * terminoX;
+                posYsalida = 600;
+              //posXsalida = 50 * (Math.floor(Math.random() * (5 - 2 + 1)) + 2);
+              //posYsalida = 600;
             } else {
-              posXsalida = 0;
-              posYsalida = 50 * (Math.floor(Math.random() * (11 - 7 + 1)) + 7);
+                ladoSalida = 'izquierda';
+                terminoX = 0;
+                terminoY = (Math.floor(Math.random() * 5) + 1);
+                posXsalida = 0;
+                posYsalida = 50 * (6 + terminoY);
+              //posXsalida = 0;
+              //posYsalida = 50 * (Math.floor(Math.random() * (11 - 7 + 1)) + 7);
             }
             break;
           default:
@@ -188,11 +224,21 @@
             document.getElementById("divTermino").innerHTML =
               "Seccion salida: D";
             if (lado) {
-              posXsalida = 50 * (Math.floor(Math.random() * (11 - 7 + 1)) + 7);
-              posYsalida = 600;
+                ladoSalida = 'abajo';
+                terminoX = (Math.floor(Math.random() * 5) + 1);
+                terminoY = 0;
+                posXsalida = 50 * (6 + terminoX);
+                posYsalida = 600;
+              //posXsalida = 50 * (Math.floor(Math.random() * (11 - 7 + 1)) + 7);
+              //posYsalida = 600;
             } else {
-              posXsalida = 600;
-              posYsalida = 50 * (Math.floor(Math.random() * (11 - 7 + 1)) + 7);
+                ladoSalida = 'derecha';
+                terminoX = 0;
+                terminoY = (Math.floor(Math.random() * 5) + 1);
+                posXsalida = 600;
+                posYsalida = 50 * (6 + terminoY);
+              //posXsalida = 600;
+              //posYsalida = 50 * (Math.floor(Math.random() * (11 - 7 + 1)) + 7);
             }
         }
         var ctx = document.getElementById("Maze").getContext("2d");
@@ -238,6 +284,7 @@
       }
 
       function generaRuta(origenX, origenY, finX, finY) {
+          console.log(origenX, origenY, finX, finY);
         let sendero = new Array();
 
         let actualX = origenX;
@@ -354,6 +401,38 @@
         });
       }
 
+      function generaMapa(){
+        let secciones = [1, 2, 3, 4];
+        let seccionInicio = seccion;
+
+        const index = array.indexOf(seccionInicio);
+        array.splice(index, 1);
+
+        // Inicio
+
+        let rndlado = Math.random() >= 0.5;
+        let rndPuerta = Math.floor(Math.random() * 5) + 1;
+        console.log("Puerta: " + rndPuerta);
+
+        switch (seccionInicio) {
+            case 1: 
+                pintaRuta(seccionInicio, generaRuta(1, 1, rndlado ? rndPuerta : 5, rndlado ? 5 : rndPuerta));
+                break;
+        
+            case 2: 
+                pintaRuta(seccionInicio, generaRuta(rndlado ? 1: rndPuerta, rndlado ? rndPuerta : 5, 5, 1));
+                break;
+
+            case 3: 
+                pintaRuta(seccionInicio, generaRuta(1, 5, rndlado ? rndPuerta : 5, rndlado ? 1 : rndPuerta));
+                break;
+
+            default:
+                pintaRuta(seccionInicio, generaRuta(rndlado ? rndPuerta : 1, rndlado ? 1 : rndPuerta, 5, 5));
+                break;
+        }
+      }
+
       var c = document.getElementById("Maze");
       var ctx = c.getContext("2d");
       ctx.beginPath();
@@ -386,10 +465,11 @@
       ctx.arc(inicioX, inicioY, 10, 0, 2 * Math.PI);
       ctx.stroke();
 
-      pintaRuta(1, generaRuta(1, 1, 5, 5));
-      pintaRuta(2, generaRuta(1, 1, 5, 5));
-      pintaRuta(3, generaRuta(1, 1, 5, 5));
-      pintaRuta(4, generaRuta(1, 1, 5, 5));
+      //pintaRuta(1, generaRuta(1, 1, 5, 5));
+      //pintaRuta(2, generaRuta(1, 1, 5, 5));
+      //pintaRuta(3, generaRuta(1, 1, 5, 5));
+      //pintaRuta(4, generaRuta(1, 1, 5, 5));
+      generaMapa();
     </script>
   </body>
 </html>
