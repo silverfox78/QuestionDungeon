@@ -1,5 +1,5 @@
 let informacion = {
-    cantidadPiezas: 7,
+    cantidadPiezas: 5,
     anchoPieza: 50,
     seccionInicio: "",
     seccionTermino: "",
@@ -597,25 +597,124 @@ function pintaMapa(){
         );        
     });
 
+    let auxX = informacion.termino.lado == 'ARRIBA' ? (informacion.termino.x * informacion.anchoPieza) : 0;
+    let auxY = informacion.termino.lado == 'ARRIBA' ? 0 : (informacion.termino.y * informacion.anchoPieza);
+
     switch (informacion.seccionTermino) {
         case 'A':
             baseX = 0;
             baseY = 0;
+
+            auxX = informacion.termino.lado == 'ARRIBA' ? (informacion.termino.x * informacion.anchoPieza) : 0;
+            auxY = informacion.termino.lado == 'ARRIBA' ? 0 : (informacion.termino.y * informacion.anchoPieza);
+
+            document
+                .getElementById("maze")
+                .insertAdjacentHTML(
+                    "beforeend",
+                    "<image href='img/stone.jpg' fill='#FFFFFF' fill-opacity='0' x='" + (informacion.termino.lado == 'ARRIBA' ? (auxX - informacion.anchoPieza) : 0) + "' y='" + (informacion.termino.lado == 'ARRIBA' ? 0 : (auxY - informacion.anchoPieza)) + "'/>"
+                );
+
+            document
+                .getElementById("maze")
+                .insertAdjacentHTML(
+                    "beforeend",
+                    "<image href='img/grass.jpg' fill='#FFFFFF' fill-opacity='0' x='" + auxX + "' y='" + auxY + "'/>"
+                );
+
+            document
+                .getElementById("maze")
+                .insertAdjacentHTML(
+                    "beforeend",
+                    "<image href='img/stone.jpg' fill='#FFFFFF' fill-opacity='0' x='" + (informacion.termino.lado == 'ARRIBA' ? (auxX + informacion.anchoPieza) : 0) + "' y='" + (informacion.termino.lado == 'ARRIBA' ? 0 : (auxY + informacion.anchoPieza)) + "'/>"
+                );
             break;
     
         case 'B':
             baseX = (informacion.anchoPieza * (informacion.cantidadPiezas + 1));
             baseY = 0;
+
+            auxX = baseX + (informacion.termino.lado == 'ARRIBA' ? (informacion.termino.x * informacion.anchoPieza) : (informacion.anchoPieza * (informacion.cantidadPiezas + 1)));
+            auxY = baseY + (informacion.termino.lado == 'ARRIBA' ? 0 : (informacion.termino.y * informacion.anchoPieza));
+
+            document
+                .getElementById("maze")
+                .insertAdjacentHTML(
+                    "beforeend",
+                    "<image href='img/stone.jpg' fill='#FFFFFF' fill-opacity='0' x='" + (informacion.termino.lado == 'ARRIBA' ? (auxX - informacion.anchoPieza) : auxX) + "' y='" + (informacion.termino.lado == 'ARRIBA' ? 0 : (auxY - informacion.anchoPieza)) + "'/>"
+                );
+
+            document
+                .getElementById("maze")
+                .insertAdjacentHTML(
+                    "beforeend",
+                    "<image href='img/grass.jpg' fill='#FFFFFF' fill-opacity='0' x='" + auxX + "' y='" + auxY + "'/>"
+                );
+
+            document
+                .getElementById("maze")
+                .insertAdjacentHTML(
+                    "beforeend",
+                    "<image href='img/stone.jpg' fill='#FFFFFF' fill-opacity='0' x='" + (informacion.termino.lado == 'ARRIBA' ? (auxX + informacion.anchoPieza) : auxX) + "' y='" + (informacion.termino.lado == 'ARRIBA' ? 0 : (auxY + informacion.anchoPieza)) + "'/>"
+                );
             break;
 
         case 'C':
             baseX = 0;
             baseY = (informacion.anchoPieza * (informacion.cantidadPiezas + 1));
+
+            auxX = baseX + (informacion.termino.lado == 'ABAJO' ? (informacion.termino.x * informacion.anchoPieza) : 0);
+            auxY = baseY + (informacion.termino.lado == 'ABAJO' ? baseY : (informacion.termino.y * informacion.anchoPieza));
+
+            document
+                .getElementById("maze")
+                .insertAdjacentHTML(
+                    "beforeend",
+                    "<image href='img/stone.jpg' fill='#FFFFFF' fill-opacity='0' x='" + (informacion.termino.lado == 'ABAJO' ? (auxX - informacion.anchoPieza) : 0) + "' y='" + (informacion.termino.lado == 'ABAJO' ? auxY : (auxY - informacion.anchoPieza)) + "'/>"
+                );
+
+            document
+                .getElementById("maze")
+                .insertAdjacentHTML(
+                    "beforeend",
+                    "<image href='img/grass.jpg' fill='#FFFFFF' fill-opacity='0' x='" + auxX + "' y='" + auxY + "'/>"
+                );
+
+            document
+                .getElementById("maze")
+                .insertAdjacentHTML(
+                    "beforeend",
+                    "<image href='img/stone.jpg' fill='#FFFFFF' fill-opacity='0' x='" + (informacion.termino.lado == 'ABAJO' ? (auxX + informacion.anchoPieza) : 0) + "' y='" + (informacion.termino.lado == 'ABAJO' ? auxY : (auxY + informacion.anchoPieza)) + "'/>"
+                );
             break;
 
         default:
             baseX = (informacion.anchoPieza * (informacion.cantidadPiezas + 1));
             baseY = (informacion.anchoPieza * (informacion.cantidadPiezas + 1));
+
+            auxX = baseX + (informacion.termino.lado == 'ABAJO' ? (informacion.termino.x * informacion.anchoPieza) : baseX);
+            auxY = baseY + (informacion.termino.lado == 'ABAJO' ? baseY : (informacion.termino.y * informacion.anchoPieza));
+
+            document
+                .getElementById("maze")
+                .insertAdjacentHTML(
+                    "beforeend",
+                    "<image href='img/stone.jpg' fill='#FFFFFF' fill-opacity='0' x='" + (informacion.termino.lado == 'ABAJO' ? (auxX - informacion.anchoPieza) : auxX) + "' y='" + (informacion.termino.lado == 'ABAJO' ? auxY : (auxY - informacion.anchoPieza)) + "'/>"
+                );
+
+            document
+                .getElementById("maze")
+                .insertAdjacentHTML(
+                    "beforeend",
+                    "<image href='img/grass.jpg' fill='#FFFFFF' fill-opacity='0' x='" + auxX + "' y='" + auxY + "'/>"
+                );
+
+            document
+                .getElementById("maze")
+                .insertAdjacentHTML(
+                    "beforeend",
+                    "<image href='img/stone.jpg' fill='#FFFFFF' fill-opacity='0' x='" + (informacion.termino.lado == 'ABAJO' ? (auxX + informacion.anchoPieza) : auxX) + "' y='" + (informacion.termino.lado == 'ABAJO' ? auxY : (auxY + informacion.anchoPieza)) + "'/>"
+                );
             break;
     }
 
