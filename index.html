@@ -70,7 +70,7 @@
       var inicioY = 0;
 
       var seccionSalida = 0;
-      var ladoSalida = '';
+      var ladoSalida = "";
       var terminoX = 0;
       var terminoY = 0;
 
@@ -157,19 +157,19 @@
             document.getElementById("divTermino").innerHTML =
               "Seccion salida: A";
             if (lado) {
-                ladoSalida = 'arriba';
-                terminoX = (Math.floor(Math.random() * 5) + 1);
-                terminoY = 0;
-                posXsalida = 50 * terminoX;
-                posYsalida = terminoY;
+              ladoSalida = "arriba";
+              terminoX = Math.floor(Math.random() * 5) + 1;
+              terminoY = 0;
+              posXsalida = 50 * terminoX;
+              posYsalida = terminoY;
               //posXsalida = 50 * (Math.floor(Math.random() * (5 - 2 + 1)) + 2);
               //posYsalida = 0;
             } else {
-                ladoSalida = 'izquierda';
-                terminoX = 0;
-                terminoY = (Math.floor(Math.random() * 5) + 1);
-                posXsalida = terminoX;
-                posYsalida = 50 * terminoY;
+              ladoSalida = "izquierda";
+              terminoX = 0;
+              terminoY = Math.floor(Math.random() * 5) + 1;
+              posXsalida = terminoX;
+              posYsalida = 50 * terminoY;
               //posXsalida = 0;
               //posYsalida = 50 * (Math.floor(Math.random() * (5 - 2 + 1)) + 2);
             }
@@ -180,19 +180,19 @@
             document.getElementById("divTermino").innerHTML =
               "Seccion salida: B";
             if (lado) {
-                ladoSalida = 'arriba';
-                terminoX = (Math.floor(Math.random() * 5) + 1);
-                terminoY = 0;
-                posXsalida = 50 * (6 + terminoX);
-                posYsalida = terminoY;
+              ladoSalida = "arriba";
+              terminoX = Math.floor(Math.random() * 5) + 1;
+              terminoY = 0;
+              posXsalida = 50 * (6 + terminoX);
+              posYsalida = terminoY;
               //posXsalida = 50 * (Math.floor(Math.random() * (11 - 7 + 1)) + 7);
               //posYsalida = 0;
             } else {
-                ladoSalida = 'derecha';
-                terminoX = 0;
-                terminoY = (Math.floor(Math.random() * 5) + 1);
-                posXsalida = 600;
-                posYsalida = 50 * terminoY;
+              ladoSalida = "derecha";
+              terminoX = 0;
+              terminoY = Math.floor(Math.random() * 5) + 1;
+              posXsalida = 600;
+              posYsalida = 50 * terminoY;
               //posXsalida = 600;
               //posYsalida = 50 * (Math.floor(Math.random() * (5 - 2 + 1)) + 2);
             }
@@ -202,19 +202,19 @@
             document.getElementById("divTermino").innerHTML =
               "Seccion salida: C";
             if (lado) {
-                ladoSalida = 'abajo';
-                terminoX = (Math.floor(Math.random() * 5) + 1);
-                terminoY = 0;
-                posXsalida = 50 * terminoX;
-                posYsalida = 600;
+              ladoSalida = "abajo";
+              terminoX = Math.floor(Math.random() * 5) + 1;
+              terminoY = 0;
+              posXsalida = 50 * terminoX;
+              posYsalida = 600;
               //posXsalida = 50 * (Math.floor(Math.random() * (5 - 2 + 1)) + 2);
               //posYsalida = 600;
             } else {
-                ladoSalida = 'izquierda';
-                terminoX = 0;
-                terminoY = (Math.floor(Math.random() * 5) + 1);
-                posXsalida = 0;
-                posYsalida = 50 * (6 + terminoY);
+              ladoSalida = "izquierda";
+              terminoX = 0;
+              terminoY = Math.floor(Math.random() * 5) + 1;
+              posXsalida = 0;
+              posYsalida = 50 * (6 + terminoY);
               //posXsalida = 0;
               //posYsalida = 50 * (Math.floor(Math.random() * (11 - 7 + 1)) + 7);
             }
@@ -224,19 +224,19 @@
             document.getElementById("divTermino").innerHTML =
               "Seccion salida: D";
             if (lado) {
-                ladoSalida = 'abajo';
-                terminoX = (Math.floor(Math.random() * 5) + 1);
-                terminoY = 0;
-                posXsalida = 50 * (6 + terminoX);
-                posYsalida = 600;
+              ladoSalida = "abajo";
+              terminoX = Math.floor(Math.random() * 5) + 1;
+              terminoY = 0;
+              posXsalida = 50 * (6 + terminoX);
+              posYsalida = 600;
               //posXsalida = 50 * (Math.floor(Math.random() * (11 - 7 + 1)) + 7);
               //posYsalida = 600;
             } else {
-                ladoSalida = 'derecha';
-                terminoX = 0;
-                terminoY = (Math.floor(Math.random() * 5) + 1);
-                posXsalida = 600;
-                posYsalida = 50 * (6 + terminoY);
+              ladoSalida = "derecha";
+              terminoX = 0;
+              terminoY = Math.floor(Math.random() * 5) + 1;
+              posXsalida = 600;
+              posYsalida = 50 * (6 + terminoY);
               //posXsalida = 600;
               //posYsalida = 50 * (Math.floor(Math.random() * (11 - 7 + 1)) + 7);
             }
@@ -279,12 +279,12 @@
       }
 
       function proseguirRuta(origenX, origenY, finX, finY) {
-          let salir = origenX == finX && origenY == finY;
-          return !salir;
+        let salir = origenX == finX && origenY == finY;
+        return !salir;
       }
 
       function generaRuta(origenX, origenY, finX, finY) {
-          console.log(origenX, origenY, finX, finY);
+        console.log(origenX, origenY, finX, finY);
         let sendero = new Array();
 
         let actualX = origenX;
@@ -401,37 +401,127 @@
         });
       }
 
-      function generaMapa(){
+      function generaMapa() {
         let secciones = [1, 2, 3, 4];
         let seccionInicio = seccion;
 
-        const index = array.indexOf(seccionInicio);
+        let index = array.indexOf(seccionInicio);
         array.splice(index, 1);
 
         // Inicio
-
         let rndlado = Math.random() >= 0.5;
         let rndPuerta = Math.floor(Math.random() * 5) + 1;
-        console.log("Puerta: " + rndPuerta);
+        console.log("Puerta Entrada: " + rndPuerta);
+
+        let puertaX = 0;
+        let puertaY = 0;
 
         switch (seccionInicio) {
-            case 1: 
-                pintaRuta(seccionInicio, generaRuta(1, 1, rndlado ? rndPuerta : 5, rndlado ? 5 : rndPuerta));
-                break;
-        
-            case 2: 
-                pintaRuta(seccionInicio, generaRuta(rndlado ? 1: rndPuerta, rndlado ? rndPuerta : 5, 5, 1));
-                break;
+          case 1:
+            puertaX = rndlado ? rndPuerta : 5;
+            puertaY = rndlado ? 5 : rndPuerta;
+            pintaRuta(seccionInicio, generaRuta(1, 1, puertaX, puertaY));     
+            ctx.fillStyle = "#FFFFFF";      
+            ctx.fillRect(puertaX * 50, puertaY* 50, 50, 50);
+            ctx.fillStyle = "#ffcc00";
+            ctx.font = "16px Arial";
+            ctx.strokeText(" salida", puertaX * 50, (puertaY* 50) + 30);
+            break;
 
-            case 3: 
-                pintaRuta(seccionInicio, generaRuta(1, 5, rndlado ? rndPuerta : 5, rndlado ? 1 : rndPuerta));
-                break;
+          case 2:
+            puertaX = rndlado ? 1 : rndPuerta;
+            puertaY = rndlado ? rndPuerta : 5;
+            pintaRuta(seccionInicio, generaRuta(puertaX, puertaY, 5, 1));
 
-            default:
-                pintaRuta(seccionInicio, generaRuta(rndlado ? rndPuerta : 1, rndlado ? 1 : rndPuerta, 5, 5));
-                break;
+            ctx.fillStyle = "#FFFFFF";      
+            ctx.fillRect(300 + (puertaX * 50), puertaY* 50, 50, 50);
+            ctx.fillStyle = "#ffcc00";
+            ctx.font = "16px Arial";
+            ctx.strokeText(" salida", 300 + (puertaX * 50), (puertaY* 50) + 30);
+            break;
+
+          case 3:
+            puertaX = rndlado ? rndPuerta : 5;
+            puertaY = rndlado ? 1 : rndPuerta;
+            pintaRuta(seccionInicio, generaRuta(1, 5, puertaX, puertaY));
+
+            ctx.fillStyle = "#FFFFFF";      
+            ctx.fillRect(puertaX * 50, 300 + (puertaY * 50), 50, 50);
+            ctx.fillStyle = "#ffcc00";
+            ctx.font = "16px Arial";
+            ctx.strokeText(" salida", puertaX * 50, 300 + (puertaY* 50) + 30);
+            break;
+
+          default:
+            puertaX = rndlado ? rndPuerta : 1;
+            puertaY = rndlado ? 1 : rndPuerta;
+            pintaRuta(seccionInicio, generaRuta(puertaX, puertaY, 5, 5));
+
+            ctx.fillStyle = "#FFFFFF";      
+            ctx.fillRect(300 + (puertaX * 50), 300 + (puertaY * 50), 50, 50);
+            ctx.fillStyle = "#ffcc00";
+            ctx.font = "16px Arial";
+            ctx.strokeText(" salida", 300 + (puertaX * 50), 300 + (puertaY* 50) + 30);
+            break;
         }
-      }
+    
+        // Termino
+        index = array.indexOf(seccionSalida);
+        array.splice(index, 1);
+        rndlado = Math.random() >= 0.5;
+        rndPuerta = Math.floor(Math.random() * 5) + 1;
+        console.log("Puerta Salida: " + rndPuerta);
+
+        switch (seccionSalida) {
+          case 1:
+            puertaX = rndlado ? rndPuerta : 5;
+            puertaY = rndlado ? 5 : rndPuerta;
+            pintaRuta(seccionSalida, generaRuta(terminoX == 0 ? 1 : terminoX, terminoY == 0 ? 1 : terminoY, puertaX, puertaY));     
+            ctx.fillStyle = "#FFFFFF";      
+            ctx.fillRect(puertaX * 50, puertaY* 50, 50, 50);
+            ctx.fillStyle = "#ffcc00";
+            ctx.font = "14px Arial";
+            ctx.strokeText("entrada", puertaX * 50, (puertaY* 50) + 30);
+            break;
+
+          case 2:
+            puertaX = rndlado ? 1 : rndPuerta;
+            puertaY = rndlado ? rndPuerta : 5;
+            pintaRuta(seccionSalida, generaRuta(puertaX, puertaY, terminoX == 0 ? 1 : terminoX, terminoY == 0 ? 1 : terminoY));
+
+            ctx.fillStyle = "#FFFFFF";      
+            ctx.fillRect(300 + (puertaX * 50), puertaY* 50, 50, 50);
+            ctx.fillStyle = "#ffcc00";
+            ctx.font = "14px Arial";
+            ctx.strokeText("entrada", 300 + (puertaX * 50), (puertaY* 50) + 30);
+            break;
+
+          case 3:
+            puertaX = rndlado ? rndPuerta : 5;
+            puertaY = rndlado ? 1 : rndPuerta;
+            pintaRuta(seccionSalida, generaRuta(terminoX == 0 ? 1 : terminoX, terminoY == 0 ? 1 : terminoY, puertaX, puertaY));
+
+            ctx.fillStyle = "#FFFFFF";      
+            ctx.fillRect(puertaX * 50, 300 + (puertaY * 50), 50, 50);
+            ctx.fillStyle = "#ffcc00";
+            ctx.font = "14px Arial";
+            ctx.strokeText("entrada", puertaX * 50, 300 + (puertaY* 50) + 30);
+            break;
+
+          default:
+            puertaX = rndlado ? rndPuerta : 1;
+            puertaY = rndlado ? 1 : rndPuerta;
+            pintaRuta(seccionSalida, generaRuta(puertaX, puertaY, terminoX == 0 ? 1 : terminoX, terminoY == 0 ? 1 : terminoY));
+
+            ctx.fillStyle = "#FFFFFF";      
+            ctx.fillRect(300 + (puertaX * 50), 300 + (puertaY * 50), 50, 50);
+            ctx.fillStyle = "#ffcc00";
+            ctx.font = "14px Arial";
+            ctx.strokeText("entrada", 300 + (puertaX * 50), 300 + (puertaY* 50) + 30);
+            break;
+        }
+    
+    }
 
       var c = document.getElementById("Maze");
       var ctx = c.getContext("2d");
